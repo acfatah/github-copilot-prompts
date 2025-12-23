@@ -36,6 +36,7 @@ Common scripts are:
 - Use `bun run format [..file]` to format code or files.
 - We are using ESLint with `@antfu/eslint-config` rules via `eslint.config.ts`.
   The following is the summary of important rules:
+  - use spaces for indentation
   - two-space indent
   - single quotes
   - alphabetised imports (file name) with `perfectionist/sort-imports`
