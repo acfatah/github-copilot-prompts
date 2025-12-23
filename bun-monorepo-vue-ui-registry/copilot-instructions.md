@@ -71,6 +71,7 @@ Prefer to inspect a package's own `package.json` for package-specific scripts.
   - single quotes
   - alphabetised imports (file name) with `perfectionist/sort-imports`
   - empty line before `return`
+  - top-level functions should be declared with function keyword
 - Naming React components/Redux
   - slices use PascalCase
   - hooks/helpers/files use camelCase
