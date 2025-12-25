@@ -19,10 +19,11 @@
 </p>
 
 Curated GitHub Copilot prompts and template snippets for faster AI-assisted workflows.
+I'll keep adding more and updating existing prompts and templates over time.
 
 ## Usage
 
-The template is the directory name under this repository.
+Under the root repository, run the following command.
 
 ```bash
 read -r -p 'Template name [bun-default]: ' template \
@@ -30,6 +31,7 @@ read -r -p 'Template name [bun-default]: ' template \
   && mkdir -p .github \
   && bunx --bun gitpick -o "acfatah/github-copilot-prompts/tree/main/$template" "./github"
 ```
+The `template` is the directory name under this repository.
 
 Read more about GitHub Copilot [here][1].
 
