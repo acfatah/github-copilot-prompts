@@ -90,8 +90,10 @@ Prefer to inspect a package's own `package.json` for package-specific scripts.
 - Limit lines around 80 characters. Insert line breaks with correct indents so line
   stays between 80 characters.
 - Be concise, use bullets.
-- Use markdown formatting for code snippets and commands.
-- Wrap commands, file paths, env vars, and code identifiers in backticks.
+- Use fenced code blocks and specify the language (e.g., ```yaml)
+  when writing code snippets or commands.
+- Wrap inline commands, file paths, env vars, and code identifiers in backticks.
+
 - Use tables in documentation whenever helpful.
 
 ## Commit Messages
@@ -103,6 +105,7 @@ Prefer to inspect a package's own `package.json` for package-specific scripts.
 - Limit subject line to 60 characters.
 - Use the body to explain what and why, not how.
 - Use bullets in the body if multiple points.
+- Do not add co-authors unless explicitly asked.
 
 ## Response & Output Style
 
