@@ -96,12 +96,18 @@ import { Component } from '@/components/ui/component-name'
 // Import other utilities if needed
 import { Icon } from '@iconify/vue'
 import { cn } from '@/lib/utils'
+
+// Define props as storyArgs if applicable
+const storyArgs = defineProps<{
+  prop1: string
+  prop2: boolean
+}>()
 </script>
 
 <template>
   <!-- Implement the story using Ark UI components -->
-  <Component.Root>
-    <Component.Child />
+  <Component.Root :prop1="storyArgs.prop1">
+    <Component.Child :prop2="storyArgs.prop2" />
     <Component.Slot />
   </Component.Root>
 </template>
@@ -135,7 +141,7 @@ export const items: ItemRecord[] = [
 ### File Names
 - Story file: `{ComponentName}.stories.ts` (e.g., `Button.stories.ts`)
 - Default story: `{ComponentName}DefaultStory.vue` (e.g., `ButtonDefaultStory.vue`)
-- Additional stories: `{Description}{ComponentName}.vue` (e.g., `SizeButton.vue`)
+- Additional stories: `{Description}{ComponentName}Story.vue` (e.g., `SizeButtonStory.vue`)
 
 ### Story Title Convention
 - Components: `Components/{ComponentName}`
