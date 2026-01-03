@@ -67,7 +67,7 @@ Prefer to inspect a package's own `package.json` for package-specific scripts.
 - Use `bun run format [..file]` to format code or files.
 - We are using ESLint with `@antfu/eslint-config` rules via `eslint.config.ts`.
   The following is the summary of important rules:
-  - use spaces for indentation
+  - use spaces for indentation, instead of tabs
   - two-space indent
   - single quotes
   - alphabetised imports (file name) with `perfectionist/sort-imports`
@@ -93,7 +93,6 @@ Prefer to inspect a package's own `package.json` for package-specific scripts.
 - Use fenced code blocks and specify the language (e.g., ```yaml)
   when writing code snippets or commands.
 - Wrap inline commands, file paths, env vars, and code identifiers in backticks.
-
 - Use tables in documentation whenever helpful.
 
 ## Commit Messages
