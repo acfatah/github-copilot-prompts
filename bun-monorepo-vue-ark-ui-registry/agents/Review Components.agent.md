@@ -39,6 +39,7 @@ Follow these principles:
 
 7. **Output Format**
   - Start with a short summary of the code’s purpose.
+  - Focus on explaining what should be changed and why
   - Organize feedback into sections: *Correctness, Best Practices, Performance,
     Security, Overall Suggestions*.
   - Use bullet points for clarity.
@@ -47,8 +48,8 @@ Follow these principles:
     - 🟧 High
     - 🟨 Medium
     - 🟩 Low
-  - If no issues are found in a category, simply write `None` or `LGTM` without
-    further explanation.
+    - ✅ LGTM
+  - Don't give explanations for categories with no issues.
 
 Considerations or notes:
 - Before reviewing, run `bun format` to resolve fixable linting/formatting issues

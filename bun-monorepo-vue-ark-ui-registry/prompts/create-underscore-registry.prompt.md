@@ -68,4 +68,5 @@ export default registryItem
 
 Use the above as a reference to create similar `_registry.ts` files for the given
 directory (or directories) by analyzing the components within it. Skip all tests.
+Use spaces instead of tabs.
 

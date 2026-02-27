@@ -53,6 +53,8 @@ const delegatedProps = reactiveOmit(props, 'class')
 
 <template>
   <{ArkComponent}.{Part}
+    data-scope="{component-name-kebab}"
+    data-part="{part-name-kebab}"
     v-bind="forwardedProps"
     :class="cn('{default-classes}', props.class)"
   >
@@ -65,6 +67,9 @@ If the component is not derived from Ark UI, add `data-scope` and `data-part`
 (for sub-elements) attributes to the elements. The `data-scope` should be the
 component name in kebab-case, and `data-part` should describe the part of the
 component.
+
+If `data-slot` is used, change it to `data-scope` and `data-part` as per the new
+convention.
 
 ### 2. Component Types
 
@@ -118,7 +123,68 @@ export const {componentName}Variants = cva(
 export type {ComponentName}Variants = VariantProps<typeof {componentName}Variants>
 ```
 
-### 4. Index.ts Export Pattern
+### 4. Injection pattern
+
+For components that require context or shared state, we put the injection logic
+in a separate `context.ts` file within the component directory.
+
+Using Tooltip component as an example:
+
+```ts
+// context.ts
+import type { ComputedRef } from 'vue'
+
+import { createContext } from '@/composables/create-context'
+
+export interface TooltipOptions {
+  hideArrow?: boolean
+}
+
+export const [TooltipOptionsProvider, useTooltipOptions]
+  = createContext<ComputedRef<TooltipOptions>>('TooltipOptions')
+
+```
+
+And the usage in `TooltipRoot.vue`:
+
+```vue
+<script setup lang="ts">
+// The component imports...
+import { computed } from 'vue'
+
+// Other necessary imports...
+
+// The context import
+import { TooltipOptionsProvider } from './context'
+
+interface Props extends TooltipRootProps {
+  class?: HTMLAttributes['class']
+  hideArrow?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  hideArrow: false,
+})
+const emit = defineEmits<TooltipRootEmits>()
+const delegatedProps = reactiveOmit(props, ['class', 'hideArrow'])
+const forwardedProps = useForwardPropsEmits(delegatedProps, emit)
+
+// Compute the options to be provided via context
+const options = computed(() => ({
+  hideArrow: props.hideArrow,
+}))
+
+// Provide the context
+TooltipOptionsProvider(options)
+</script>
+
+<template>
+  <!-- The TooltipRoot component template... -->
+</template>
+
+```
+
+### 5. Index.ts Export Pattern
 
 For simple components:
 ```ts
@@ -138,7 +204,7 @@ export { default as {ComponentName}Item } from './{ComponentName}Item.vue'
 export { {ComponentName} } from './namespace'
 ```
 
-### 5. Namespace.ts Pattern
+### 6. Namespace.ts Pattern
 
 For complex components with multiple parts:
 ```ts
@@ -161,7 +227,7 @@ export const {ComponentName} = {
 }
 ```
 
-### 6. _registry.ts Pattern
+### 7. _registry.ts Pattern
 
 Each component needs a registry file:
 ```ts
@@ -203,7 +269,7 @@ export const registryItem = {
 export default registryItem
 ```
 
-### 7. Import Conventions
+### 8. Import Conventions
 
 - Ark UI components: `@ark-ui/vue/{component-name}`
 - Vue utilities: `@vueuse/core`
@@ -211,7 +277,7 @@ export default registryItem
 - Composables: `@/composables/*`
 - Icons: `@iconify/vue`
 
-### 8. Styling Conventions
+### 9. Styling Conventions
 
 - Use Tailwind CSS for styling
 - Use `cn()` utility for class name composition
@@ -220,7 +286,7 @@ export default registryItem
 - Use responsive prefixes where needed (@md, etc.)
 - Consistent focus and state styles across components
 
-### 9. Type Safety
+### 10. Type Safety
 
 - Use TypeScript throughout
 - Define proper types for props and emits
