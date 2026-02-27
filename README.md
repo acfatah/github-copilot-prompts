@@ -26,13 +26,13 @@ I'll keep adding more and updating existing prompts and templates over time.
 Under the root repository, run the following command.
 
 ```bash
-read -r -p 'Template name [bun-default]: ' template \
-  && template=${template:-bun-default} \
+read -r -p 'Template name [bun-general]: ' template \
+  && template=${template:-bun-general} \
   && mkdir -p .github \
-  && bunx --bun gitpick -o "acfatah/github-copilot-prompts/tree/main/$template" "./github"
+  && bunx --bun gitpick -o "acfatah/github-copilot-prompts/tree/main/$template" ".github"
 ```
 The `template` is the directory name under this repository.
 
-Read more about GitHub Copilot [here][1].
+Learn more about GitHub Copilot [here][1].
 
 [1]: https://code.visualstudio.com/docs/copilot/overview

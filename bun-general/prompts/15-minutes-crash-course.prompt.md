@@ -2,7 +2,7 @@
 agent: 'ask'
 description: 'Topic to ask for a 15-minutes crash course.'
 ---
-For a give topic, create a 15-minute crash course on the topic given for full-stack
+For a given topic, create a 15-minute crash course on the topic for full-stack
 developers. Structure the content as concise, actionable bullet points. Use markdown
 formatting. Use tables where helpful. Focus on factual accuracy and organize each
 section using the What, Why, and How framework. Prioritize core concepts that deliver
