@@ -2,8 +2,15 @@
 agent: agent
 ---
 
-Accordion `_registry.ts` component as example:
-```typescript
+# Create _registry.ts File
+
+Analyze the components in the given directory (or directories) and create a
+`_registry.ts` file for each using the Accordion pattern below as reference.
+Skip all tests. Use spaces instead of tabs.
+
+## Pattern (Accordion example)
+
+```ts
 import type { RegistryItem } from 'shadcn/schema'
 import { html } from 'common-tags'
 
@@ -13,7 +20,8 @@ export const registryItem = {
   title: 'Accordion',
 
   description: html`
-    A vertically stacked set of interactive headings that each reveal a section of content.
+    A vertically stacked set of interactive headings that each reveal a section
+    of content.
 
     References:
     - Headless API: https://ark-ui.com/docs/components/accordion
@@ -65,8 +73,3 @@ export const registryItem = {
 
 export default registryItem
 ```
-
-Use the above as a reference to create similar `_registry.ts` files for the given
-directory (or directories) by analyzing the components within it. Skip all tests.
-Use spaces instead of tabs.
-

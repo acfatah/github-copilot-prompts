@@ -2,8 +2,14 @@
 agent: agent
 ---
 
-RadioGroup `namespace.ts` component as example:
-```typescript
+# Create Namespace File
+
+Create `namespace.ts` for the given component directory (or directories) using
+the RadioGroup pattern below. Also update `index.ts` to export the namespace object.
+
+## Pattern (RadioGroup example)
+
+```ts
 import RadioGroupDescription from './RadioGroupDescription.vue'
 import RadioGroupIndicator from './RadioGroupIndicator.vue'
 import RadioGroupItem from './RadioGroupItem.vue'
@@ -40,7 +46,7 @@ export const RadioGroup = {
   /**
    * RadioGroupItems component
    *
-   * A flex column used to wrap radio button items. It handles orientation and spacing.
+   * A flex column used to wrap radio button items. Handles orientation and spacing.
    */
   Items: RadioGroupItems,
 
@@ -68,8 +74,8 @@ export const RadioGroup = {
   /**
    * RadioGroupItemContent component
    *
-   * A flex column used to group ItemText and ItemDescription. Not required if you
-   * have no description.
+   * A flex column used to group ItemText and ItemDescription.
+   * Not required if you have no description.
    */
   ItemContent: RadioGroupItemContent,
 
@@ -101,11 +107,9 @@ export const RadioGroup = {
    */
   RootProvider: RadioGroupRootProvider,
 }
-
 ```
 
-For Component that does not have repeated inner components we'll use `Content`
-instead of `ItemContent` to group the `Label` and `Description`. Create namespace
-for the given directory (or directories) accordingly using similar pattern.
+## Note
 
-Also update `index.ts` to export the namespace object.
+For components without repeated inner items, use `Content` instead of `ItemContent`
+to group `Label` and `Description`.

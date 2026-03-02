@@ -2,7 +2,13 @@
 agent: agent
 ---
 
-Example:
+# Create Props and Emits Type Interfaces
+
+Create `Props` and `Emits` interfaces for the components or components under the
+given directory (or directories). Skip all tests.
+
+## Pattern
+
 ```vue
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
@@ -28,6 +34,3 @@ const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
 </script>
 ```
-
-Use the above example as a reference to create Props and Emits interfaces for the
-components or components under a directory (or directories) mentioned. Skip all tests.
