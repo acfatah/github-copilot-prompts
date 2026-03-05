@@ -2,12 +2,14 @@
 
 ## Quick orientation
 
-This repository is a Bun-powered monorepo containing `apps/` and `packages/`.
+
+Implementation of [shadcn/ui](https://ui.shadcn.com/) components using Vue 3 and [Ark UI](https://ark-ui.com/).
+This repository is a Bun-powered monorepo containing `apps/` and `packages/` workspaces.
 Use `bun` for installs and running scripts.
 
 ## Big picture and structure
 
-- Multi-app monorepo layout:
+- Multi-app monorepo layout (bun workspaces):
   - `apps/` (e.g. `apps/storybook`)
   - `packages/` (e.g. `packages/registry`)
 
@@ -15,14 +17,17 @@ Use `bun` for installs and running scripts.
 .
 ├── README.md
 ├── apps
-│   ├── storybook      # Storybook app for component development and visual testing
-│   └── web            # Main landing page app built with Astro
+│   ├── storybook      # Component development and visual testing (Storybook 10 + Vue3 + Vite)
+│   └── web            # Documentation site (Astro + Starlight)
 ├── package.json
 ├── packages
-│   └── registry       # The component registry
+│   ├── cli            # CLI tool for component installation
+│   └── registry       # Core component library (main package)
 ├── scripts
 ├── templates
-│   └── starter        # Template for starting new projects
+│   └── starter        # Project starter templates
+├── .bun-version       # Bun version file
+├── package.json       # Root package.json for shared dependencies and scripts
 └── tsconfig.json
 ```
 
@@ -30,7 +35,7 @@ Use `bun` for installs and running scripts.
 
 Need to `cd` into the specific app or package to run scripts.
 
-- Install dependencies (root):
+- Install dependencies:
 
   ```bash
   bun install
@@ -45,13 +50,42 @@ Need to `cd` into the specific app or package to run scripts.
 
 Common scripts:
 
-- `bun run start` (if applicable)
-- `bun run dev` (if applicable)
-- `bun run build` (if applicable)
-- `bun run preview` (if applicable)
-- `bun run lint` (if applicable)
-- `bun run typecheck` (if applicable)
-- `bun run format` (if applicable)
-- `bun run test` (if applicable)
+bun run start                 # start an app (if applicable)
+bun run dev                   # start development server
+bun run build                 # build
+bun run lint                  # lint
+bun run format [..files]      # fix lint issues
+bun run typecheck             # TypeScript type checking
+bun run test                  # run tests (vitest)
+bun run test:watch            # watch mode
 
-Prefer to inspect each package's own `package.json` for package-specific scripts.
+Prefer to inspect each package's own `package.json` for workspace-specific scripts.
+
+## Patterns and conventions
+
+### Registry Package (`packages/registry`)
+
+Components live in `src/components/ui/<name>/`. Each component folder contains:
+
+- `<Name>.vue` — main component using `<script setup>`
+- `types.ts` — props interface
+- `variant.ts` — CVA variants (size, variant, etc.)
+- `_registry.ts` — metadata for the shadcn CLI (`registryItem`)
+- `index.ts` — re-exports
+
+Key patterns:
+- Headless behavior from **Ark UI** (built on Zag.js state machines)
+- Styling via **Tailwind CSS v4** + **class-variance-authority (CVA)**
+- `cn()` utility from `lib/utils.ts` (clsx + tailwind-merge)
+- `useForwardPropsEmits`, `useForwardProps`, `reactiveOmit` from VueUse for prop forwarding
+- `asChild` prop pattern for rendering as a custom element
+
+Global styles and theming are in `src/styles/global.css` (24 color themes, OKLch color space, dark mode via `.dark` class).
+
+### Storybook App (`apps/storybook`)
+
+Stories live in `stories/ui/<name>/`. Each component folder has:
+- `<Name>.stories.ts` — story meta, argTypes, and named story exports
+- `*Story.vue` — individual story variant components
+
+The `@` alias in storybook Vite config points to `packages/registry/src`.
